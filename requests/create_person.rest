@@ -1,8 +1,9 @@
+# https://phonebook-backend-exercises.herokuapp.com/api/persons
 
-POST https://phonebook-backend-exercises.herokuapp.com/api/persons
+POST http://localhost:3001/api/persons
 Content-Type: application/json
 
 {
-    "name": "Alan Turing",
-    "number": "11-01-100110"
+    "name": "Ada Lovelace",
+    "number": "39-44-5323523"
 }

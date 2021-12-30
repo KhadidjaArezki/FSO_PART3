@@ -1,1 +1,2 @@
-DELETE https://phonebook-backend-exercises.herokuapp.com/api/persons/4
+# https://phonebook-backend-exercises.herokuapp.com
+DELETE http://localhost:3001/api/persons/2
