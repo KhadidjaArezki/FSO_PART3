@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+var uniqueValidator = require('mongoose-unique-validator')
 
 const url = process.env.MONGODB_URI
 
@@ -14,8 +15,27 @@ mongoose.connect(url)
 
 const personSchema = new mongoose.Schema({
   id: String,
-  name: String,
-  number: String
+  name: {
+    type: String,
+    minlength: 3,
+    required: true,
+    unique: true
+  }, 
+  number: {
+    type: String,
+    required: true,
+    unique: true,
+    validate: {
+      validator: function(v) {
+        return (/(?:\d.*){8,}/).test(v)
+      },
+      message: 'Number must contain at least 8 digits'
+    }
+  }
+})
+
+personSchema.plugin(uniqueValidator, {
+  message: '{TYPE} constraint violation error: The {PATH} {VALUE} already exists in the phonebook',
 })
 
 personSchema.set('toJSON', {
