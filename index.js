@@ -12,7 +12,7 @@ app.use(express.json())
 app.use(express.static('build'))
 
 morgan.token('data', (req, res) => {
-    if (req.method === 'POST') return JSON.stringify(req.body)
+  if (req.method === 'POST') return JSON.stringify(req.body)
 })
 
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms :data'))
@@ -35,8 +35,8 @@ app.post('/api/persons', (request, response, next) => {
   const body = request.body
 
   // if (body.name === undefined || body.number === undefined) {
-  //   return response.status(400).json({ 
-  //     error: 'missing name or number' 
+  //   return response.status(400).json({
+  //     error: 'missing name or number'
   //   })
   // }
 
@@ -47,7 +47,7 @@ app.post('/api/persons', (request, response, next) => {
 
   person.save()
     .then(savedPerson => {
-    response.json(savedPerson.toJSON())
+      response.json(savedPerson.toJSON())
     })
     .catch(error => next(error))
 })
@@ -64,7 +64,7 @@ app.delete('/api/persons/:id', (request, response, next) => {
 
 app.get('/info', (request, response) => {
   Person.find({})
-    .then(people => { 
+    .then(people => {
       response.send(`<p>Phonebook has info for ${people.length} poeple</p>
         <p>${new Date()}</p>`)
     })
@@ -89,7 +89,7 @@ app.put('/api/persons/:id', (request, response, next) => {
 const unknownEndpoint = (request, response) => {
   response.status(404).send({ error: 'unknown endpoint' })
 }
-  
+
 app.use(unknownEndpoint)
 
 const errorHandler = (error, request, response, next) => {
@@ -97,19 +97,19 @@ const errorHandler = (error, request, response, next) => {
 
   if (error.name === 'CastError') {
     return response.status(400).send({ error: 'malformatted id' })
-  } 
+  }
   else if (error.name === 'ValidationError') {
     // console.log(error.errors.name.kind, error.errors.number.kind);
     const errorField = error.errors.name || error.errors.number
     if (errorField !== undefined) {
       // console.log('errorField is defined. HURRAY!!', errorField.kind);
       if (errorField.kind === 'unique' ) {
-        console.log('BEWARE! UNIQUE CONSTRAINT VIOLATED');
-        return response.status(409).json({ error: error.message})
+        console.log('BEWARE! UNIQUE CONSTRAINT VIOLATED')
+        return response.status(409).json({ error: error.message })
       }
     }
 
-    return response.status(400).json({ error: error.message})
+    return response.status(400).json({ error: error.message })
   }
   next(error)
 }
@@ -117,7 +117,7 @@ const errorHandler = (error, request, response, next) => {
 // this has to be the last loaded middleware.
 app.use(errorHandler)
 
-const PORT = process.env.PORT 
+const PORT = process.env.PORT
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })

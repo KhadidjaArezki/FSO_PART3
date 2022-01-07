@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
+    "lint": "eslint . --fix",
     "dev": "nodemon index.js",
     "build:ui": "rm -rf build && cd ../FullStackOpen/part2/b/ && npm run build && cp -r build ../../../FSO_PART3/build",
     "deploy": "git push heroku master",
@@ -23,6 +24,7 @@
   },
   "homepage": "https://github.com/KhadidjaArezki/FSO_PART3#readme",
   "devDependencies": {
+    "eslint": "^8.6.0",
     "nodemon": "^2.0.15"
   },
   "dependencies": {

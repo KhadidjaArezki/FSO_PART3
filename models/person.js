@@ -20,7 +20,7 @@ const personSchema = new mongoose.Schema({
     minlength: 3,
     required: true,
     unique: true
-  }, 
+  },
   number: {
     type: String,
     required: true,
